@@ -1,116 +1,108 @@
-# E-commerce Business Analytics Dashboard
+# E-commerce Analytics Dashboard
 
-A comprehensive business intelligence solution featuring both Jupyter notebook analysis and a professional Streamlit dashboard for e-commerce sales data with configurable time periods and reusable business metrics calculations.
+A professional Streamlit dashboard for analyzing e-commerce business performance, featuring interactive visualizations and real-time data filtering.
 
 ## Overview
 
-This project transforms a basic exploratory data analysis into a professional, maintainable business intelligence framework. The refactored solution provides:
-
-- **Configurable Analysis**: Easily analyze any time period or compare different years
-- **Modular Architecture**: Reusable data loading and metrics calculation modules
-- **Professional Visualizations**: Business-oriented charts with proper formatting
-- **Strategic Insights**: Automated generation of business recommendations
-
-## Project Structure
-
-```
-data_analysis/
-├── EDA_Refactored.ipynb     # Main analysis notebook
-├── dashboard.py             # Streamlit dashboard application
-├── data_loader.py           # Data loading and processing module
-├── business_metrics.py      # Business metrics calculation module
-├── requirements.txt         # Python dependencies
-├── README.md               # This file
-└── ecommerce_data/         # Data directory
-    ├── orders_dataset.csv
-    ├── order_items_dataset.csv
-    ├── products_dataset.csv
-    ├── customers_dataset.csv
-    ├── order_reviews_dataset.csv
-    └── order_payments_dataset.csv
-```
+This project provides a comprehensive business intelligence solution featuring both Jupyter notebook analysis and a professional Streamlit dashboard for e-commerce sales data with configurable time periods and reusable business metrics calculations.
 
 ## Features
 
-### 1. Configurable Analysis Framework
-- Set analysis year, comparison year, and month filters
-- Flexible time period analysis without code changes
-- Automatic handling of missing data periods
+### Dashboard Layout Structure
 
-### 2. Comprehensive Business Metrics
-- **Revenue Analysis**: Total revenue, growth rates, average order value
-- **Product Performance**: Category analysis, revenue share, top performers
-- **Geographic Insights**: State-level revenue and order analysis
-- **Customer Satisfaction**: Review scores, satisfaction distribution
-- **Delivery Performance**: Delivery times, speed categorization
+- **Header**: Clean title with date range filter (top-left: title, top-right: date filter)
+- **KPI Row**: Four key performance indicators with year-over-year trend analysis
+  - Total Revenue with trend indicator
+  - Monthly Growth percentage
+  - Average Order Value with trend indicator
+  - Total Orders with trend indicator
+- **Charts Grid**: 2×2 visualization layout
+  - **Revenue Trend Chart**: Line chart comparing current and previous year
+    - Solid line for current period
+    - Dashed line for previous period
+    - Grid lines for easier reading
+    - Y-axis formatted as $300K instead of $300,000
+  - **Top 10 Categories**: Horizontal bar chart sorted descending
+    - Blue gradient coloring (lighter for lower values)
+    - Values formatted as $300K and $2M
+  - **Revenue by State**: US choropleth map
+    - Blue gradient color-coding by revenue amount
+  - **Satisfaction vs Delivery Time**: Bar chart analysis
+    - X-axis: Delivery time buckets (1-3 days, 4-7 days, 8+ days)
+    - Y-axis: Average review score
+- **Bottom Row**: Customer experience metrics
+  - Average delivery time with trend indicator
+  - Review Score card with star rating and subtitle
 
-### 3. Professional Visualizations
-- Monthly revenue trend charts
-- Product category performance bars
-- Interactive geographic heatmaps
-- Customer satisfaction distributions
-- Consistent color schemes and formatting
+### Key Features
 
-### 4. Automated Insights
-- Strategic recommendations based on data patterns
-- Performance benchmarking and alerts
-- Executive summary generation
+- **Interactive Filtering**: Year-based filtering that updates all metrics and visualizations
+- **Trend Indicators**: Color-coded arrows showing performance changes
+  - Green for positive trends
+  - Red for negative trends
+  - All trends show 2 decimal places
+- **Professional Styling**: Clean, modern design with uniform card heights for each row
+- **Responsive Charts**: Plotly-based interactive charts with hover details
+- **Smart Formatting**: Currency values displayed as $300K, $2M for better readability
 
-## Installation and Setup
+## Installation
 
 ### Prerequisites
 - Python 3.8 or higher
-- Jupyter Notebook or JupyterLab (for notebook analysis)
+- pip package manager
 
 ### Installation Steps
 
-1. **Clone or download the project files**
+1. **Clone or download this repository**
 
-2. **Install required dependencies**:
+2. **Install dependencies**:
    ```bash
    pip install -r requirements.txt
    ```
 
-3. **Ensure data files are in place**:
-   - Place CSV files in the `ecommerce_data/` directory
-   - Verify all required files are present (see Project Structure above)
+3. **Verify data files**: Ensure the `ecommerce_data/` directory contains:
+   - orders_dataset.csv
+   - order_items_dataset.csv
+   - products_dataset.csv
+   - customers_dataset.csv
+   - order_reviews_dataset.csv
+   - order_payments_dataset.csv
 
-4. **Run the applications**:
+## Usage
 
-   **For Streamlit Dashboard**:
+### Running the Dashboard
+
+1. **Navigate to the project directory**:
+   ```bash
+   cd lesson7_files
+   ```
+
+2. **Launch the Streamlit dashboard**:
    ```bash
    streamlit run dashboard.py
    ```
 
-   **For Jupyter Notebook Analysis**:
+3. **Access the dashboard**:
+   - The dashboard will automatically open in your default web browser
+   - Default URL: http://localhost:8501
+
+### Using the Dashboard
+
+1. **Select Date Range**: Use the dropdown in the top-right to filter data by year
+2. **View KPIs**: Monitor key metrics with trend indicators showing year-over-year changes (2 decimal places)
+3. **Analyze Charts**: Interact with visualizations to explore:
+   - Monthly revenue trends compared to previous year
+   - Top performing product categories with blue gradient
+   - Geographic revenue distribution across US states
+   - Relationship between delivery time and customer satisfaction
+4. **Customer Experience**: Review delivery performance and customer ratings at the bottom
+
+### Running the Jupyter Notebook
+
+1. **Launch Jupyter**:
    ```bash
    jupyter notebook EDA_Refactored.ipynb
    ```
-
-## Usage Guide
-
-### Streamlit Dashboard
-
-1. **Launch the dashboard**:
-   ```bash
-   streamlit run dashboard.py
-   ```
-
-2. **Navigate the interface**:
-   - Use the **year filter** in the top-right to select analysis period
-   - View **KPI cards** showing key metrics with trend indicators
-   - Explore **interactive charts** in the 2x2 grid layout
-   - Monitor **customer experience metrics** in the bottom row
-
-3. **Dashboard Features**:
-   - **Real-time filtering**: All charts update automatically when year is changed
-   - **Professional styling**: Clean, business-ready interface
-   - **Trend indicators**: Green/red arrows showing performance changes
-   - **Formatted values**: Currency displayed as $300K, $2M for readability
-
-### Notebook Analysis
-
-1. **Open the refactored notebook**: `EDA_Refactored.ipynb`
 
 2. **Configure analysis parameters** in the first code cell:
    ```python
@@ -122,41 +114,141 @@ data_analysis/
 
 3. **Run all cells** to generate the complete analysis
 
-### Advanced Configuration
+## Project Structure
 
-#### Analyzing Specific Time Periods
-```python
-# Analyze only Q4 2023
-for month in [10, 11, 12]:
-    ANALYSIS_MONTH = month
-    # Run analysis
+```
+lesson7_files/
+├── dashboard.py              # Main Streamlit dashboard application
+├── data_loader.py           # Data loading and processing utilities
+├── business_metrics.py      # Business metrics calculation module
+├── EDA_Refactored.ipynb    # Source analysis notebook
+├── requirements.txt         # Python dependencies
+├── README.md               # This file
+└── ecommerce_data/         # Data directory
+    ├── orders_dataset.csv
+    ├── order_items_dataset.csv
+    ├── products_dataset.csv
+    ├── customers_dataset.csv
+    ├── order_reviews_dataset.csv
+    └── order_payments_dataset.csv
 ```
 
-#### Custom Data Paths
+## Technical Details
+
+### Dependencies
+
+- **pandas**: Data manipulation and analysis
+- **numpy**: Numerical computing
+- **plotly**: Interactive visualizations
+- **streamlit**: Web dashboard framework
+- **matplotlib**: Additional plotting support
+- **seaborn**: Statistical visualizations
+
+### Data Processing Architecture
+
+The dashboard uses a modular architecture:
+
+1. **Data Loader** (`data_loader.py`):
+   - Loads and cleans raw CSV files
+   - Joins multiple datasets
+   - Calculates delivery metrics
+   - Provides filtered datasets based on user selection
+
+2. **Business Metrics** (`business_metrics.py`):
+   - Calculates revenue metrics and growth rates
+   - Analyzes product and geographic performance
+   - Computes customer satisfaction metrics
+   - Generates delivery performance statistics
+
+3. **Dashboard** (`dashboard.py`):
+   - Renders interactive UI with Streamlit
+   - Creates Plotly visualizations with specific formatting
+   - Manages state and filtering
+   - Applies professional styling with CSS
+
+### Key Metrics Explained
+
+- **Total Revenue**: Sum of all order item prices for delivered orders
+- **Monthly Growth**: Average month-over-month revenue growth percentage
+- **Average Order Value (AOV)**: Mean total value per order
+- **Total Orders**: Count of unique delivered orders
+- **Trend Indicators**: Year-over-year percentage change with 2 decimal precision
+- **Delivery Time**: Days between order placement and customer delivery
+- **Review Score**: Average customer rating (1-5 stars)
+
+## Customization
+
+### Changing the Default Year
+
+Edit line 381 in `dashboard.py`:
 ```python
-# Use different data location
-DATA_PATH = '/path/to/your/data/'
+if 2023 in available_years:  # Change 2023 to your preferred default year
+    default_year_index = available_years.index(2023)
 ```
 
-#### Filtering by Order Status
-```python
-# Modify in data_loader.py create_sales_dataset method
-status_filter = 'delivered'  # or 'shipped', 'processing', etc.
-```
+### Modifying Color Schemes
 
-### Module Usage
+Chart colors can be customized in the respective chart functions:
+- **Revenue trend**: Lines 158, 173 (colors: #1f77b4, #ff7f0e)
+- **Category chart**: Lines 228-231 (blue gradient RGB values)
+- **State map**: Line 275 (colorscale='Blues')
+- **Satisfaction chart**: Line 335 (color='#1f77b4')
 
-#### Data Loading Module
+### Adjusting Card Heights
+
+Modify CSS in `dashboard.py`:
+- **KPI cards**: Line 41 (`height: 140px`)
+- **Bottom cards**: Line 82 (`height: 180px`)
+
+### Adding New Metrics
+
+1. Extend the `BusinessMetricsCalculator` class in `business_metrics.py`
+2. Add visualization methods to create new charts
+3. Update dashboard.py to display new metrics
+
+## Troubleshooting
+
+### Common Issues
+
+1. **Module not found errors**:
+   ```bash
+   pip install -r requirements.txt --upgrade
+   ```
+
+2. **Data loading errors**:
+   - Verify all CSV files exist in `ecommerce_data/` directory
+   - Check file permissions
+   - Ensure CSV files are not corrupted
+
+3. **Port already in use**:
+   ```bash
+   streamlit run dashboard.py --server.port 8502
+   ```
+
+4. **Charts not displaying**:
+   - Clear browser cache
+   - Restart the Streamlit server
+   - Check browser console for JavaScript errors
+
+5. **Empty Results**:
+   - Verify date filters match available data range
+   - Check order status filtering (defaults to 'delivered')
+
+## Performance Optimization
+
+- **Data Caching**: The `@st.cache_data` decorator caches loaded data for faster filtering
+- **Efficient Queries**: Groupby operations are optimized for large datasets
+- **Lazy Loading**: Charts are only rendered when data is available
+- **Modular Processing**: Data is processed only when filters change
+
+## Module Usage
+
+### Data Loading Module
 ```python
 from data_loader import EcommerceDataLoader, load_and_process_data
 
 # Quick start
 loader, processed_data = load_and_process_data('ecommerce_data/')
-
-# Advanced usage
-loader = EcommerceDataLoader('ecommerce_data/')
-loader.load_raw_data()
-processed_data = loader.process_all_data()
 
 # Create filtered dataset
 sales_data = loader.create_sales_dataset(
@@ -166,7 +258,7 @@ sales_data = loader.create_sales_dataset(
 )
 ```
 
-#### Business Metrics Module
+### Business Metrics Module
 ```python
 from business_metrics import BusinessMetricsCalculator, MetricsVisualizer
 
@@ -180,144 +272,18 @@ report = metrics_calc.generate_comprehensive_report(
 # Create visualizations
 visualizer = MetricsVisualizer(report)
 revenue_fig = visualizer.plot_revenue_trend()
-category_fig = visualizer.plot_category_performance()
 ```
-
-## Key Business Metrics
-
-### Revenue Metrics
-- **Total Revenue**: Sum of all delivered order item prices
-- **Revenue Growth Rate**: Year-over-year percentage change
-- **Average Order Value (AOV)**: Average total value per order
-- **Monthly Growth Trends**: Month-over-month performance
-
-### Product Performance
-- **Category Revenue**: Revenue by product category
-- **Market Share**: Percentage of total revenue by category
-- **Category Diversity**: Distribution across product lines
-
-### Geographic Analysis
-- **State Performance**: Revenue and order count by state
-- **Market Penetration**: Number of active markets
-- **Regional AOV**: Average order value by geographic region
-
-### Customer Experience
-- **Review Scores**: Average satisfaction rating (1-5 scale)
-- **Satisfaction Distribution**: Percentage of high/low ratings
-- **Delivery Performance**: Average delivery time and speed metrics
-
-## Output Examples
-
-### Console Output
-```
-BUSINESS METRICS SUMMARY - 2023
-============================================================
-
-REVENUE PERFORMANCE:
-  Total Revenue: $3,360,294.74
-  Total Orders: 4,635
-  Average Order Value: $724.98
-  Revenue Growth: -2.5%
-
-CUSTOMER SATISFACTION:
-  Average Review Score: 4.10/5.0
-  High Satisfaction (4+): 84.2%
-
-DELIVERY PERFORMANCE:
-  Average Delivery Time: 8.0 days
-  Fast Delivery (≤3 days): 28.5%
-```
-
-### Generated Visualizations
-- Monthly revenue trend line charts
-- Top product category horizontal bar charts
-- Interactive US state choropleth maps
-- Customer satisfaction distribution charts
-
-## Customization Options
-
-### Adding New Metrics
-1. Extend the `BusinessMetricsCalculator` class in `business_metrics.py`
-2. Add visualization methods to `MetricsVisualizer` class
-3. Update the notebook to display new metrics
-
-### Custom Visualizations
-```python
-# Example: Custom visualization
-def plot_custom_metric(self, data):
-    fig, ax = plt.subplots(figsize=(12, 6))
-    # Your visualization code
-    return fig
-```
-
-### Data Source Modifications
-- Modify `data_loader.py` to handle different CSV structures
-- Update column mappings in the `EcommerceDataLoader` class
-- Add new data validation rules
-
-## Troubleshooting
-
-### Common Issues
-
-1. **Module Import Errors**:
-   - Ensure all files are in the same directory
-   - Check Python path configuration
-
-2. **Missing Data Files**:
-   - Verify CSV files are in the `ecommerce_data/` directory
-   - Check file naming matches expected patterns
-
-3. **Empty Results**:
-   - Verify date filters match available data
-   - Check order status filtering
-
-4. **Visualization Issues**:
-   - Ensure all required packages are installed
-   - Check Plotly version compatibility for interactive maps
-
-### Performance Optimization
-- For large datasets, consider chunked processing
-- Use data sampling for initial exploration
-- Implement caching for repeated analysis
-
-## Dashboard Features
-
-### Layout Structure
-- **Header**: Title with year selection filter (applies globally)
-- **KPI Row**: 4 metric cards with trend indicators
-  - Total Revenue, Monthly Growth, Average Order Value, Total Orders
-  - Color-coded trends (green for positive, red for negative)
-- **Charts Grid**: 2x2 interactive visualization layout
-  - Revenue trend (current vs previous year)
-  - Top 10 product categories bar chart
-  - US state choropleth map
-  - Customer satisfaction vs delivery time analysis
-- **Bottom Row**: Customer experience metrics
-  - Average delivery time with trend
-  - Review score with star rating
-
-### Technical Features
-- **Real-time Filtering**: All visualizations update automatically
-- **Professional Styling**: Business-ready interface with uniform card heights
-- **Plotly Charts**: Interactive, publication-quality visualizations
-- **Responsive Design**: Adapts to different screen sizes
-- **Error Handling**: Graceful handling of missing data
 
 ## Future Enhancements
 
-### Planned Features
-- Real-time data connections
+Potential improvements:
+- Month-level filtering option
+- Product-level drill-down capability
+- Export functionality (PDF/Excel reports)
 - Predictive analytics and forecasting
 - Customer segmentation analysis
-- A/B testing framework
-- Automated report scheduling
-- Export functionality (PDF reports)
-
-### Extension Ideas
-- Integration with business intelligence tools
-- API endpoints for metrics access
-- Machine learning model integration
-- Advanced statistical analysis
+- Real-time data refresh capability
+- A/B testing framework integration
 - Mobile-responsive improvements
 
 ## Contributing
@@ -326,13 +292,26 @@ To extend this analysis framework:
 
 1. Follow the existing code structure and documentation patterns
 2. Add comprehensive docstrings to new functions
-3. Include unit tests for new business logic
+3. Include error handling for edge cases
 4. Update this README with new features
+5. Test with different data ranges
 
 ## License
 
 This project is provided as-is for educational and business analysis purposes.
 
+## Support
+
+For issues or questions:
+1. Check the troubleshooting section above
+2. Review the Streamlit documentation: https://docs.streamlit.io
+3. Review the Plotly documentation: https://plotly.com/python/
+4. Verify data format matches expected schema
+
 ---
+
+**Dashboard Version**: 1.0
+**Last Updated**: February 2026
+**Built with**: Streamlit, Plotly, Pandas
 
 **Note**: This framework is designed to be easily maintained and extended for ongoing business intelligence needs. The modular architecture ensures that updates to data sources or metric calculations can be made without affecting the overall analysis structure.
